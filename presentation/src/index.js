@@ -25,6 +25,8 @@ import {
   Markdown,
   indentNormalizer,
 } from "spectacle";
+const headshot = require.resolve('./headshot-bw.png');
+const rnDiagram = require.resolve('./rn-diagram.png');
 
 const formidableLogo =
   "https://avatars2.githubusercontent.com/u/5078602?s=280&v=4";
@@ -71,7 +73,7 @@ const template = () => (
         <Progress color="#222222"/>
       </Box>
     </FlexBox>
-    <Box position="absolute" top={0} right={0}>
+    <Box position="absolute" top={10} right={10}>
       <Image src={formidableLogo} width={70}/>
     </Box>
   </FlexBox>
@@ -87,12 +89,22 @@ const Presentation = () => (
       <Heading fontSize="h2" textAlign="left">
         An Introduction to React Native Reanimated 2
       </Heading>
+      <Heading fontSize="h3" textAlign="left">By Grant Sander</Heading>
     </Slide>
     {/* Intro */}
     <Slide>
-      <Heading fontSize="h1" textAlign="left">Grant Sander</Heading>
-      <Heading fontSize="h2" textAlign="left">Software Engineer @ <span
-        style={{color: FORMIDABLE_ORANGE}}>Formidable</span></Heading>
+      <FlexBox justifyContent="flex-start" flex="1">
+        <FlexBox justifyContent="flex-start" alignItems="flex-start">
+          <Box>
+            <Image src={headshot} width={400} />
+          </Box>
+          <Box paddingLeft="3em">
+            <Heading fontSize="h1" textAlign="left">Grant Sander</Heading>
+            <Heading fontSize="h2" textAlign="left">Software Engineer @ <span
+              style={{color: FORMIDABLE_ORANGE}}>Formidable</span></Heading>
+          </Box>
+        </FlexBox>
+      </FlexBox>
     </Slide>
     {/* Claims */}
     <Slide>
@@ -108,9 +120,15 @@ const Presentation = () => (
     </Slide>
     {/* RN Abstraction */}
     <Slide>
-      <Heading fontSize="h1" textAlign="left">Let's talk React Native</Heading>
-      <Heading fontSize="h2" textAlign="left">It's a great abstraction!</Heading>
-      <Text color="red">TODO: Diagram of bridge...</Text>
+      <FlexBox flexDirection="column" alignItems="flex-start" justifyContent="space-between" flex="1">
+        <Box>
+          <Heading fontSize="h1" textAlign="left">Let's talk React Native.</Heading>
+          <Heading fontSize="h2" textAlign="left">It's a great abstraction!</Heading>
+        </Box>
+        <Box padding="100px 150px">
+          <Image src={rnDiagram} width={1} />
+        </Box>
+      </FlexBox>
     </Slide>
     {/* Animation in React Native */}
     <Slide>
@@ -145,6 +163,7 @@ const Presentation = () => (
           'Execute JS on _main thread_ via "worklets", minimizing bridge trips while writing JS.',
           "Connect to view props/styles via hooks-based API.",
           "React to events on main thread via hooks-based API.",
+          "Can pass messages over the bridge if needed."
         ])}
       </UnorderedList>
     </Slide>

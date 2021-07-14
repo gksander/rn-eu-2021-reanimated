@@ -54,7 +54,7 @@ module.exports = {
   // Default for boilerplate generation.
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Spectacle presentation',
+      title: 'Modern Day Animation in React Native',
       template: './src/index.html'
     })
   ]
