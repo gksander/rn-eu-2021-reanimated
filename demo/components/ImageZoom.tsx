@@ -11,8 +11,6 @@ import {
   PinchGestureHandlerGestureEvent,
 } from "react-native-gesture-handler";
 
-const AnimatedImage = Reanimated.createAnimatedComponent(Image);
-
 export const ImageZoom: React.FC<ImageProps> = ({ ...rest }) => {
   const translateX = useSharedValue(0);
   const translateY = useSharedValue(0);
@@ -60,7 +58,7 @@ export const ImageZoom: React.FC<ImageProps> = ({ ...rest }) => {
           containerSize.value = { width, height };
         }}
       >
-        <AnimatedImage {...rest} />
+        <Image {...rest} />
       </Reanimated.View>
     </PinchGestureHandler>
   );

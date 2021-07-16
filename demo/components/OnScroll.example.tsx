@@ -1,5 +1,12 @@
 import * as React from "react";
-import { Dimensions, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import {
+  Dimensions,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import ImageFadeIn from "./ImageFadeIn";
 import Reanimated, {
   Extrapolate,
@@ -8,58 +15,28 @@ import Reanimated, {
   useAnimatedStyle,
   useSharedValue,
 } from "react-native-reanimated";
-
 const HorseImg = require("../img/horse.jpeg");
 
 export const OnScrollExample: React.FC = () => {
-  const scrollY = useSharedValue(0);
-  const breakpoint = useSharedValue(Dimensions.get("window").height);
-
-  const onScroll = useAnimatedScrollHandler((evt) => {
-    scrollY.value = evt.contentOffset.y;
-  });
-
-  const animatedHeaderStyle = useAnimatedStyle(() => {
-    return {
-      opacity: interpolate(
-        scrollY.value,
-        [breakpoint.value - FADE_OFFSET, breakpoint.value],
-        [0, 1],
-        Extrapolate.CLAMP
-      ),
-    };
-  });
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ flex: 1 }}>
-        <Reanimated.ScrollView
+        <ScrollView
           contentContainerStyle={styles.contentContainer}
-          onScroll={onScroll}
           scrollEventThrottle={16}
         >
           <HorseHeaderImage />
           <View style={{ height: 32 }} />
 
-          <Text
-            style={styles.titleText}
-            onLayout={(evt) => {
-              const { y, height } = evt.nativeEvent.layout;
-              breakpoint.value = y + height;
-            }}
-          >
-            Neat Horse
-          </Text>
+          <Text style={styles.titleText}>Neat Horse</Text>
           <Subtitle />
           <Divider />
           <FillerContent />
-        </Reanimated.ScrollView>
-        <Reanimated.View
-          style={[styles.headerContainer, animatedHeaderStyle]}
-          pointerEvents="none"
-        >
+        </ScrollView>
+        {/* "Sticky" header! */}
+        <View style={[styles.headerContainer]} pointerEvents="none">
           <HeaderContent />
-        </Reanimated.View>
+        </View>
       </View>
     </SafeAreaView>
   );

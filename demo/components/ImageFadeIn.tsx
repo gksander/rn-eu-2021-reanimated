@@ -6,40 +6,15 @@ import Reanimated, {
 } from "react-native-reanimated";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 
-const AnimatedImage = Reanimated.createAnimatedComponent(Image);
-
 const ImageFadeIn: React.FC<ImageProps> = ({ style, onLoad, ...rest }) => {
-  const [isLoaded, setIsLoaded] = React.useState(false);
-
-  const imageStyle = useAnimatedStyle(() => {
-    return {
-      opacity: withTiming(isLoaded ? 1 : 0, { duration: 400 }),
-      transform: [
-        {
-          scale: withTiming(isLoaded ? 1 : 0.8, { duration: 300 }),
-        },
-      ],
-    };
-  });
-
   return (
     <View>
-      <AnimatedImage
-        style={[imageStyle, style]}
-        onLoad={(evt) => {
-          onLoad?.(evt);
-          setIsLoaded(true);
-        }}
-        {...rest}
-      />
-      {!isLoaded && (
-        <View style={[StyleSheet.absoluteFill, styles.spinner]}>
-          <ActivityIndicator color="#000" />
-        </View>
-      )}
+      <Image style={style} {...rest} />
     </View>
   );
 };
+
+const AnimatedImage = Reanimated.createAnimatedComponent(Image);
 
 const styles = StyleSheet.create({
   spinner: {
